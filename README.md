@@ -13,15 +13,29 @@ Self-Driving Car Engineer Nanodegree Program
 
 Here we're using Model Predictive Control (MPC) with 100ms latency. It's a Kinematic model that does not take gravity or tire force into account. 
 
- This includes the state, actuators and update equations.
-
- ## Timestep Length and Elapsed Duration (N & dt)
-
+The state is an Eigen Vector containing the car's location, the heading, the velocity, the cross track error, and the heading error.
 ```
 Eigen::VectorXd state(6);
 state << x, y, psi, v, cte, epsi;
 
 ```
+The actuators are the the throttle and the steering angle.
+
+Calculating the updates are based on these equations
+
+## Timestep Length and Elapsed Duration (N & dt)
+I tried many iterations of N (timestep length) and dt (elapsed duration between timesteps) and I settled on N = 10, dt = 0.15. Having dt be higher than the latency helped my model perform better.
+
+I also tried
+N = 10, 15, 22
+dt = 1, 0.5, 0.1
+
+## Polynomial Fitting and MPC Preprocessing
+The waypoints values have been provided as part of the project. We translate them to vehicle coordinates and a polynomial is fit to the waypoints.
+
+## Model Predictive Control with Latency
+First I tuned my model without latency and then tried tuning parameters to get the model to work with latency. In the end what worked best was setting a dt higher than the latency.
+
 ---
 
 ## Dependencies
