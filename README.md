@@ -1,6 +1,27 @@
 # CarND-Controls-MPC
 Self-Driving Car Engineer Nanodegree Program
 
+[//]: # (Image References)
+
+[image1]: ./images/final.gif "Left"
+
+---
+
+![alt text][image1]
+
+## The Model
+
+Here we're using Model Predictive Control (MPC) with 100ms latency. It's a Kinematic model that does not take gravity or tire force into account. 
+
+ This includes the state, actuators and update equations.
+
+ ## Timestep Length and Elapsed Duration (N & dt)
+
+```
+Eigen::VectorXd state(6);
+state << x, y, psi, v, cte, epsi;
+
+```
 ---
 
 ## Dependencies
