@@ -9,7 +9,7 @@ using CppAD::AD;
 //10, 15, 22
 size_t N = 10;
 //1, 0.5, 0.1 - bigger than latency works!
-double dt = 0.15;
+double dt = 0.1;
 
 // This value assumes the model presented in the classroom is used.
 //

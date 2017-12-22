@@ -24,7 +24,7 @@ The actuators are the the throttle and the steering angle.
 Calculating the updates are based on these equations
 
 ## Timestep Length and Elapsed Duration (N & dt)
-I tried many iterations of N (timestep length) and dt (elapsed duration between timesteps) and I settled on N = 10, dt = 0.15. Having dt be higher than the latency helped my model perform better.
+I tried many iterations of N (timestep length) and dt (elapsed duration between timesteps) and I settled on N = 10, dt = 0.15.
 
 I also tried
 N = 10, 15, 22
@@ -34,7 +34,7 @@ dt = 1, 0.5, 0.1
 The waypoints values have been provided as part of the project. We translate them to vehicle coordinates and a polynomial is fit to the waypoints.
 
 ## Model Predictive Control with Latency
-First I tuned my model without latency and then tried tuning parameters to get the model to work with latency. In the end what worked best was setting a dt higher than the latency.
+First I tuned my model without latency and then tried tuning parameters to get the model to work with latency. In the end what worked best was setting using kinematic equations to predict the states after 100ms, then I send them to MPC.
 
 ---
 

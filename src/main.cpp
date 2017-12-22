@@ -118,8 +118,21 @@ int main() {
           *
           */
             
+            int latency_dt = 0.1;
+            double Lf = 2.67;
+            
+            // Add latency of 100ms
+            px = v * cos(psi) * latency_dt;
+            py = v * sin(psi) * latency_dt;
+            psi = v * steer_value / Lf * latency_dt;
+            v = v + throttle_value * latency_dt;
+            cte = cte + v * sin(epsi) * latency_dt;
+            epsi = epsi + v * steer_value / Lf * latency_dt;
+            
+            // Add everything to the state
             Eigen::VectorXd state(6);
-            state << 0, 0, 0, v, cte, epsi;
+            state << px, py, psi, v, cte, epsi;
+            
             auto vars = mpc.Solve(state, coeffs);
             
             steer_value = vars[0];
@@ -128,7 +141,7 @@ int main() {
           json msgJson;
           // NOTE: Remember to divide by deg2rad(25) before you send the steering value back.
           // Otherwise the values will be in between [-deg2rad(25), deg2rad(25] instead of [-1, 1].
-          msgJson["steering_angle"] = -steer_value/(deg2rad(25)*2.67);
+          msgJson["steering_angle"] = -steer_value/(deg2rad(25)*Lf);
           msgJson["throttle"] = throttle_value;
 
           //Display the MPC predicted trajectory 
