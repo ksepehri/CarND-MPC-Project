@@ -24,7 +24,7 @@ The actuators are the the throttle and the steering angle.
 Calculating the updates are based on these equations
 
 ## Timestep Length and Elapsed Duration (N & dt)
-I tried many iterations of N (timestep length) and dt (elapsed duration between timesteps) and I settled on N = 10, dt = 0.15.
+I tried many iterations of N (timestep length) and dt (elapsed duration between timesteps) and I settled on N = 10, dt = 0.1. A higher N affects the controller performance and computational time, it also makes the vehicle run off the road easier. A smaller dt leads to finer resolution and more accurate controls.  The time horizon (N*dt) affect the predicted path in that a short time horizon is less accurate/smooth but more responsive. A long time horizon is smoother.
 
 I also tried
 N = 10, 15, 22

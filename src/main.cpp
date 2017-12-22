@@ -90,8 +90,10 @@ int main() {
           double px = j[1]["x"];
           double py = j[1]["y"];
           double psi = j[1]["psi"];
+//            double psi = j[1]["steering_angle"];
           double v = j[1]["speed"];
             double steer_value = j[1]["steering_angle"];
+//            steer_value = -steer_value;
             double throttle_value = j[1]["throttle"];
             
             for(int i=0; i<ptsx.size(); i++) {
@@ -122,12 +124,12 @@ int main() {
             double Lf = 2.67;
             
             // Add latency of 100ms
-            px = v * cos(psi) * latency_dt;
-            py = v * sin(psi) * latency_dt;
-            psi = v * steer_value / Lf * latency_dt;
-            v = v + throttle_value * latency_dt;
+            px = v * cos(-steer_value) * latency_dt;
+            py = v * sin(-steer_value) * latency_dt;
             cte = cte + v * sin(epsi) * latency_dt;
             epsi = epsi + v * steer_value / Lf * latency_dt;
+            psi = v * -steer_value / Lf * latency_dt;
+            v = v + throttle_value * latency_dt;
             
             // Add everything to the state
             Eigen::VectorXd state(6);
